@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Verificador de Ingreso</title>
   <style>
     body {
+      background-color: #121212; /* fondo casi negro */
+      color: white; /* letras blancas */
       font-family: Arial, sans-serif;
       padding: 20px;
-      background-color: #1a1a1a; /* plomo oscuro */
-      color: white;
-      font-weight: bold;
+      font-weight: bold; /* letras en negrita */
       text-align: center;
     }
     input, button {
       font-size: 1.2em;
       padding: 10px;
+      margin: 5px;
       border-radius: 5px;
       border: none;
     }
     input {
-      width: 250px;
-      margin-right: 10px;
+      width: 200px;
     }
     button {
-      background-color: #444; /* gris más claro para el botón */
+      background-color: #2196f3; /* azul para el botón */
       color: white;
       cursor: pointer;
-      font-weight: bold;
     }
     button:hover {
-      background-color: #666;
+      background-color: #0b7dda;
     }
     #mensaje {
       margin-top: 20px;
       font-weight: bold;
-      font-size: 1.3em;
     }
-    #logo {
-      max-width: 200px;
+    img {
       margin-bottom: 20px;
+      width: 100px;
+      height: auto;
     }
   </style>
 </head>
 <body>
-  <!-- Cambia el src con la ruta de tu logo -->
-  <img id="logo" src="logo.png" alt="Logo de la empresa" />
-
+  <img src="logo.png" alt="Logo">
   <h2>Verificador de Ingreso</h2>
   <p>Ingresa el RUT (sin puntos, sin guión):</p>
-  <input type="text" id="rut" placeholder="Ej: 123456789" />
+  <input type="text" id="rut" placeholder="Ej: 123456789">
   <button onclick="verificar()">Verificar</button>
 
   <div id="mensaje"></div>
@@ -62,7 +59,7 @@
       .catch(error => console.error('Error al cargar los RUTs:', error));
 
     function verificar() {
-      const rutIngresado = document.getElementById("rut").value.trim().toLowerCase();
+      const rutIngresado = document.getElementById("rut").value.trim();
       const mensaje = document.getElementById("mensaje");
 
       if (rutAutorizados.includes(rutIngresado)) {
