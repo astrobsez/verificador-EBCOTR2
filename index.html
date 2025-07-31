@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificador de Ingreso</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #e0f7fa; }
+    input, button { font-size: 1.2em; padding: 10px; }
+    #mensaje { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Verificador de Ingreso</h2>
+  <p>Ingresa el RUT (sin puntos, sin guión):</p>
+  <input type="text" id="rut" placeholder="Ej: 12345678-9">
+  <button onclick="verificar()">Verificar</button>
+
+  <div id="mensaje"></div>
+
+  <script>
+    let rutAutorizados = [];
+
+    fetch('ruts.json')
+      .then(response => response.json())
+      .then(data => rutAutorizados = data.autorizados)
+      .catch(error => console.error('Error al cargar los RUTs:', error));
+
+    function verificar() {
+      const rutIngresado = document.getElementById("rut").value.trim();
+      const mensaje = document.getElementById("mensaje");
+
+      if (rutAutorizados.includes(rutIngresado)) {
+        mensaje.textContent = "✅ Trabajador autorizado para su ingreso";
+        mensaje.style.color = "green";
+      } else {
+        mensaje.textContent = "❌ Trabajador no registrado en obra";
+        mensaje.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
