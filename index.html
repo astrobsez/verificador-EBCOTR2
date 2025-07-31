@@ -1,18 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Verificador de Ingreso</title>
   <style>
-    body { font-family: Arial; padding: 20px; background: #e0f7fa; }
-    input, button { font-size: 1.2em; padding: 10px; }
-    #mensaje { margin-top: 20px; font-weight: bold; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #1a1a1a; /* plomo oscuro */
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+    input, button {
+      font-size: 1.2em;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    input {
+      width: 250px;
+      margin-right: 10px;
+    }
+    button {
+      background-color: #444; /* gris más claro para el botón */
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #666;
+    }
+    #mensaje {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+    #logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
+  <!-- Cambia el src con la ruta de tu logo -->
+  <img id="logo" src="logo.png" alt="Logo de la empresa" />
+
   <h2>Verificador de Ingreso</h2>
   <p>Ingresa el RUT (sin puntos, sin guión):</p>
-  <input type="text" id="rut" placeholder="Ej: 123456789">
+  <input type="text" id="rut" placeholder="Ej: 123456789" />
   <button onclick="verificar()">Verificar</button>
 
   <div id="mensaje"></div>
@@ -26,15 +62,15 @@
       .catch(error => console.error('Error al cargar los RUTs:', error));
 
     function verificar() {
-      const rutIngresado = document.getElementById("rut").value.trim();
+      const rutIngresado = document.getElementById("rut").value.trim().toLowerCase();
       const mensaje = document.getElementById("mensaje");
 
       if (rutAutorizados.includes(rutIngresado)) {
         mensaje.textContent = "✅ Trabajador autorizado para su ingreso";
-        mensaje.style.color = "green";
+        mensaje.style.color = "lightgreen";
       } else {
         mensaje.textContent = "❌ Trabajador no registrado en obra";
-        mensaje.style.color = "red";
+        mensaje.style.color = "tomato";
       }
     }
   </script>
