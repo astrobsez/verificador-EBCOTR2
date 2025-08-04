@@ -50,26 +50,31 @@
 
   <div id="mensaje"></div>
 
-  <script>
-    let rutAutorizados = [];
+<script>
+  let rutAutorizados = [];
 
-    fetch('ruts.json')
-      .then(response => response.json())
-      .then(data => rutAutorizados = data.autorizados)
-      .catch(error => console.error('Error al cargar los RUTs:', error));
+  fetch('ruts.json')
+    .then(response => response.json())
+    .then(data => {
+      rutAutorizados = data.autorizados;
+      console.log("RUTs cargados correctamente:", rutAutorizados); // <-- LÍNEA NUEVA
+    })
+    .catch(error => console.error('Error al cargar los RUTs:', error));
 
-    function verificar() {
-      const rutIngresado = document.getElementById("rut").value.trim();
-      const mensaje = document.getElementById("mensaje");
+  function verificar() {
+    const rutIngresado = document.getElementById("rut").value.trim();
+    const mensaje = document.getElementById("mensaje");
 
-      if (rutAutorizados.includes(rutIngresado)) {
-        mensaje.textContent = "✅ Trabajador autorizado para su ingreso";
-        mensaje.style.color = "lightgreen";
-      } else {
-        mensaje.textContent = "❌ Trabajador no registrado en obra";
-        mensaje.style.color = "tomato";
-      }
+    console.log("RUT ingresado:", rutIngresado); // <-- Otra línea útil para depurar
+
+    if (rutAutorizados.includes(rutIngresado)) {
+      mensaje.textContent = "✅ Trabajador autorizado para su ingreso";
+      mensaje.style.color = "lightgreen";
+    } else {
+      mensaje.textContent = "❌ Trabajador no registrado en obra";
+      mensaje.style.color = "tomato";
     }
-  </script>
+  }
+</script>
 </body>
 </html>
